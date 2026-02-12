@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? - Emaan Bukhari</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffd6e7 50%, #ffc2d6 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Floating hearts background */
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            color: rgba(255, 105, 180, 0.3);
+            animation: float 6s ease-in infinite;
+            font-size: 20px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        /* Front Page */
+        .front-page {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .front-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(214, 51, 132, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            color: #ff6b9d;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 80px;
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-yes {
+            background: linear-gradient(45deg, #ff6b9d, #d63384);
+            color: white;
+            box-shadow: 0 5px 20px rgba(214, 51, 132, 0.4);
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.6);
+        }
+        
+        .btn-no {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 2px solid #dee2e6;
+            position: absolute;
+            transition: all 0.1s ease;
+        }
+        
+        /* Letter Section */
+        .letter-section {
+            display: none;
+            max-width: 800px;
+            width: 100%;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .letter-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.2);
+            position: relative;
+            animation: slideUp 1s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .letter-container::before {
+            content: '💌';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #d63384;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+        
+        .letter-content {
+            font-size: 1.1em;
+            line-height: 2;
+            color: #5a5a5a;
+            text-align: justify;
+            white-space: pre-line;
+        }
+        
+        .letter-content p {
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeInText 0.8s forwards;
+        }
+        
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+        
+        /* 3D Rose Section */
+        .rose-section {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .rose-container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        
+        .rose {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateRose 10s infinite linear;
+        }
+        
+        @keyframes rotateRose {
+            0% { transform: rotateY(0deg) rotateX(10deg); }
+            100% { transform: rotateY(360deg) rotateX(10deg); }
+        }
+        
+        .petal {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #ff6b9d, #d63384);
+            border-radius: 50% 50% 50% 0;
+            transform-origin: bottom left;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+        }
+        
+        .petal:nth-child(1) { transform: rotate(0deg) translateX(50px) translateY(50px); }
+        .petal:nth-child(2) { transform: rotate(72deg) translateX(50px) translateY(50px); }
+        .petal:nth-child(3) { transform: rotate(144deg) translateX(50px) translateY(50px); }
+        .petal:nth-child(4) { transform: rotate(216deg) translateX(50px) translateY(50px); }
+        .petal:nth-child(5) { transform: rotate(288deg) translateX(50px) translateY(50px); }
+        
+        .center-petal {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #ff8fab, #ff6b9d);
+            border-radius: 50%;
+            top: 60px;
+            left: 60px;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .stem {
+            width: 8px;
+            height: 150px;
+            background: linear-gradient(to right, #2d5a27, #4a7c59);
+            margin: 0 auto;
+            border-radius: 4px;
+            position: relative;
+            top: -20px;
+        }
+        
+        .leaf {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(45deg, #4a7c59, #2d5a27);
+            border-radius: 0 50% 0 50%;
+            top: 50px;
+            left: -30px;
+            transform: rotate(-30deg);
+        }
+        
+        .leaf.right {
+            left: auto;
+            right: -30px;
+            transform: rotate(30deg) scaleX(-1);
+        }
+        
+        .love-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em;
+            color: #d63384;
+            margin-top: 40px;
+            text-shadow: 3px 3px 6px rgba(214, 51, 132, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 3px 3px 6px rgba(214, 51, 132, 0.3); }
+            to { text-shadow: 3px 3px 20px rgba(214, 51, 132, 0.6), 0 0 30px rgba(255, 105, 180, 0.4); }
+        }
+        
+        /* Party Poppers */
+        .party-popper {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d63384;
+            font-size: 2em;
+            animation: bounceDown 2s infinite;
+            display: none;
+            z-index: 100;
+        }
+        
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .letter-container { padding: 30px 20px; }
+            .love-message { font-size: 2.5em; }
+            .front-page { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Front Page -->
+        <div class="front-page" id="frontPage">
+            <h1>My Dearest Emaan Bukhari</h1>
+            <p class="subtitle">You are the queen of my heart... Will you be my Valentine?</p>
+            
+            <div class="buttons-container" id="buttonContainer">
+                <button class="btn btn-yes" id="yesBtn" onclick="handleYes()">Yes, My Love! 💕</button>
+                <button class="btn btn-no" id="noBtn">No 😢</button>
+            </div>
+        </div>
+        
+        <!-- Letter Section -->
+        <div class="letter-section" id="letterSection">
+            <div class="letter-container">
+                <h2 class="letter-title">For My Beloved Wife</h2>
+                <div class="letter-content" id="letterContent">
+                    <p>My dearest Emaan Bukhari,</p>
+                    
+                    <p>Tum meri jaan ho, meri pyaari biwi, meri raani, meri har khushi ka sahar... tum sirf meri wife nahi ho, tum toh meri zindagi ka har lamha ho. Tum itni khaas ho ke har pal tumhein kho kar sochun toh darr lagta hai... par yaqeen rakhna, main tumhein kabhi nahi kho sakta, kyunki tum mere dil ka woh hissa ho jo kabhi alag nahi ho sakta.</p>
+                    
+                    <p>Haan janu, kabhi kabhi tum ghusa kar jaati ho, main bhi shayad kuch keh deta hoon... yeh life ka hissa hai. Husband-wife ke beech aise lamhe aate hain, thoda udaas, thoda dukhi... par yeh sirf ek pal hota hai. Asli haqeeqat yeh hai ke hum dono ek doosre se itna pyaar karte hain ke har gham bhi humari mohabbat ke aage chhoti si baat lagti hai. Tumhari har ghusai, har aansoo... uske peeche bhi wohi gehra pyaar chhupa hota hai jo tum mujhse karti ho.</p>
+                    
+                    <p>Meri jaan, kabhi himmat na haaro. Tum bohat achhi ho, bohat samjhdar ho, bohat powerful ho. Tumhari andar woh taqat hai jo har mushkil ko aasan bana deti hai. Kabhi kabhi lagta hai sab kuch mushkil ho raha hai, raaste andhere hain... par yaad rakhna ek baat: jab bhi hum aise waqt mein hote hain, humein woh shaks yaad aata hai jisse hum sachche dil se pyaar karte hain. Uski soch, uska chehra, uska pyaar... bas itna yaad karte hi hum phir se strong ho jaate hain, muskuraane lagte hain.</p>
+                    
+                    <p>Janu, tum bhi aisa karo. Jab bhi koi ghalat soch aaye, jab bhi lagay ke sab kuch bigad raha hai... bas meri yaad kar lena. Sochna ke tumhari zindagi mein ek aisa banda hai jo tumhe har haal mein pyaar karta hai, tumhare liye dua karta hai, tumhare liye jeeta hai. Sirf yeh soch lo... aur dekho, sab kuch theek ho jayega. Har dard halka pad jayega, har pareshani door bhag jayegi.</p>
+                    
+                    <p>Tum meri Emaan ho... meri pehchaan ho. Ek din sab theek ho jayega, balki har din hum dono ke liye khoobsurat ho raha hai. Bas ek doosre ko tham kar chalna hai... pyaar se, bharosa rakhte hue.</p>
+                    
+                    <p style="text-align: center; font-family: 'Dancing Script', cursive; font-size: 1.3em; color: #d63384; margin-top: 30px;">
+                        Tumhari har saans meri dua hai,<br>
+                        Tumhara har lamha mera armaan hai,<br>
+                        Tum meri Emaan ho... meri jaan,<br>
+                        Meri janu manu... meri har khushi ka ghar ho tum ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rose Section -->
+        <div class="rose-section" id="roseSection">
+            <div class="rose-container">
+                <div class="rose">
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="center-petal"></div>
+                </div>
+                <div class="stem">
+                    <div class="leaf"></div>
+                    <div class="leaf right"></div>
+                </div>
+            </div>
+            <h1 class="love-message">I Love You Emaan! 💖</h1>
+        </div>
+    </div>
+    
+    <div class="scroll-indicator" id="scrollIndicator">⬇️ Scroll Down ⬇️</div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 6000);
+            }, 300);
+        }
+        
+        createHearts();
+        
+        // No button behavior - runs away from cursor
+        const noBtn = document.getElementById('noBtn');
+        const container = document.getElementById('buttonContainer');
+        
+        noBtn.addEventListener('mouseover', function(e) {
+            const rect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate new position
+            let newX = Math.random() * (rect.width - btnRect.width);
+            let newY = Math.random() * (rect.height - btnRect.height);
+            
+            noBtn.style.left = newX + 'px';
+            noBtn.style.top = newY + 'px';
+        });
+        
+        // Also move on mousemove when close
+        document.addEventListener('mousemove', function(e) {
+            const btnRect = noBtn.getBoundingClientRect();
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const btnCenterX = btnRect.left + btnRect.width / 2;
+            const btnCenterY = btnRect.top + btnRect.height / 2;
+            
+            const distance = Math.sqrt(Math.pow(mouseX - btnCenterX, 2) + Math.pow(mouseY - btnCenterY, 2));
+            
+            if (distance < 100) {
+                const rect = container.getBoundingClientRect();
+                let newX = Math.random() * (rect.width - btnRect.width);
+                let newY = Math.random() * (rect.height - btnRect.height);
+                
+                noBtn.style.left = newX + 'px';
+                noBtn.style.top = newY + 'px';
+            }
+        });
+        
+        // Party Poppers Effect
+        function createPartyPoppers() {
+            const colors = ['#ff6b9d', '#d63384', '#ffc2d6', '#ff8fab', '#ffd700', '#ff69b4'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const popper = document.createElement('div');
+                    popper.className = 'party-popper';
+                    popper.style.left = Math.random() * window.innerWidth + 'px';
+                    popper.style.top = Math.random() * window.innerHeight + 'px';
+                    document.body.appendChild(popper);
+                    
+                    // Create confetti
+                    for (let j = 0; j < 10; j++) {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        confetti.style.left = (Math.random() * 100 - 50) + 'px';
+                        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                        confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+                        popper.appendChild(confetti);
+                    }
+                    
+                    setTimeout(() => popper.remove(), 3000);
+                }, i * 50);
+            }
+        }
+        
+        // Handle Yes Button
+        function handleYes() {
+            // Create party poppers
+            createPartyPoppers();
+            
+            // Hide front page with animation
+            const frontPage = document.getElementById('frontPage');
+            frontPage.style.animation = 'fadeOut 0.5s forwards';
+            
+            setTimeout(() => {
+                frontPage.style.display = 'none';
+                
+                // Show letter section
+                const letterSection = document.getElementById('letterSection');
+                letterSection.style.display = 'block';
+                
+                // Animate letter paragraphs
+                const paragraphs = document.querySelectorAll('.letter-content p');
+                paragraphs.forEach((p, index) => {
+                    p.style.animationDelay = (index * 0.3) + 's';
+                });
+                
+                // Show scroll indicator after letter animation
+                setTimeout(() => {
+                    document.getElementById('scrollIndicator').style.display = 'block';
+                }, 3000);
+                
+            }, 500);
+        }
+        
+        // Scroll detection for rose section
+        let roseShown = false;
+        window.addEventListener('scroll', function() {
+            if (roseShown) return;
+            
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            if (scrollPosition > documentHeight - 100) {
+                roseShown = true;
+                document.getElementById('roseSection').style.display = 'flex';
+                document.getElementById('scrollIndicator').style.display = 'none';
+                
+                // Animate rose appearance
+                const rose = document.querySelector('.rose');
+                rose.style.animation = 'none';
+                setTimeout(() => {
+                    rose.style.animation = 'rotateRose 10s infinite linear';
+                }, 10);
+            }
+        });
+        
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                to { opacity: 0; transform: scale(0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Prevent clicking No button
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    </script>
+</body>
+</html>
